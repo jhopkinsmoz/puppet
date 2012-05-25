@@ -1,6 +1,6 @@
 class nrpe::install {
     case $operatingsystem {
-        CentOS: {
+        CentOS,RedHat: {
             package {
                 "nrpe":
                     ensure => latest;

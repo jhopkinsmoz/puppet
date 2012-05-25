@@ -13,7 +13,7 @@ class puppet::atboot {
 
     # create a service
     case $operatingsystem {
-        CentOS: {
+        CentOS,RedHat: {
             file {
                 "/etc/init.d/puppet":
                     mode => 0755,

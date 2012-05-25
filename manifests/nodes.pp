@@ -184,3 +184,10 @@ node "relabs-slave.build.mtv1.mozilla.com" {
     include toplevel::slave::test
 }
 
+node /.*\.releng\.aws-us-west-1\.mozilla\.com/ {
+    # Make sure we get our /etc/hosts set up
+    class {
+        "network::aws": stage => packagesetup,
+    }
+    include toplevel::slave::build
+}

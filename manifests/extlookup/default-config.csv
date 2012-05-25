@@ -1,4 +1,4 @@
-puppet_notif_email,dustin@mozilla.com
+puppet_notif_email,catlee@mozilla.com
 puppet_server,puppet
 yum_server,repos
 builder_username,cltbld
