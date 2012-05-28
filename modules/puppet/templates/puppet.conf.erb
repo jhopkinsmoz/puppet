@@ -4,6 +4,7 @@
     logdir = /var/log/puppet
     rundir = /var/run/puppet
     ssldir = /var/lib/puppet/ssl
+    confgdir = /etc/puppet/production
 
 [agent]
     classfile = $vardir/classes.txt
@@ -14,3 +15,10 @@
     #   https://projects.puppetlabs.com/issues/14550
     # for why this doesn't work with chained certs
     certificate_revocation = false
+
+[master]
+    # default to looking in the production/ subdirectory of /etc/puppet
+    manifestdir = $confdir/production/manifests
+    modulepath = $confdir/production/modules
+    templatedir = $confdir/production/templates
+    manifest = $manifestdir/site.pp

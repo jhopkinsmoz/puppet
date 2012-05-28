@@ -26,10 +26,10 @@ class packages::setup {
             url_path => "repos/yum/mozilla/CentOS/6/$hardwaremodel";
         "releng-public":
             url_path => "repos/yum/releng/public/noarch";
-        "releng-public-$hardwaremodel":
-            url_path => "repos/yum/releng/public/$hardwaremodel";
-        "releng-public-i386":
-            url_path => "repos/yum/releng/public/i386";
+        #"releng-public-$hardwaremodel":
+            #url_path => "repos/yum/releng/public/$hardwaremodel";
+        #"releng-public-i386":
+            #url_path => "repos/yum/releng/public/i386";
         "puppetlabs":
             url_path => "repos/yum/mirrors/puppetlabs/el/6/products/$hardwaremodel";
     }
