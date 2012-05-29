@@ -36,6 +36,7 @@ class toplevel::server::puppet inherits toplevel::base {
     }
 
     service {
+        # TODO: this isn't getting refreshed
         "iptables":
             require => [
                 File["/etc/sysconfig/iptables"],
@@ -50,7 +51,6 @@ class toplevel::server::puppet inherits toplevel::base {
                 File["/var/lib/puppet/ssl/ca"],
             ],
             # TODO: Add config version script
-            # TODO: Add autosigning?
             subscribe => [File["/etc/puppet/puppet.conf"], File["/etc/puppet/fileserver.conf"]],
             ensure => running,
             enable => true;
