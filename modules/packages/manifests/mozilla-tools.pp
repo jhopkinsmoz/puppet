@@ -54,9 +54,9 @@ class packages::mozilla-tools {
                     require => Package["supervisor"],
                     ensure => present,
                     source => "puppet:///modules/packages/supervisord.conf";
-		"/usr/local/bin/hg":
-		    ensure => "/tools/python27-mercurial/bin/hg",
-		    require => Package["mozilla-python27-virtualenv"];
+                "/usr/local/bin/hg":
+                    ensure => "/tools/python27-mercurial/bin/hg",
+                    require => Package["mozilla-python27-virtualenv"];
             }
 
             service {
