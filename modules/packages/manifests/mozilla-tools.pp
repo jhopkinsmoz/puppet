@@ -47,13 +47,16 @@ class packages::mozilla-tools {
                 "/etc/mock_mozilla/mozilla-centos6-i386.cfg":
                     ensure => present,
                     source => "puppet:///modules/packages/mozilla-centos6-i386.cfg";
-                "/etc/mock_mozilla/mozilla-centos5-i386.cfg":
+                "/etc/mock_mozilla/mozilla-centos6-x86_64.cfg":
                     ensure => present,
-                    source => "puppet:///modules/packages/mozilla-centos5-i386.cfg";
+                    source => "puppet:///modules/packages/mozilla-centos6-x86_64.cfg";
                 "/etc/supervisord.conf":
                     require => Package["supervisor"],
                     ensure => present,
                     source => "puppet:///modules/packages/supervisord.conf";
+		"/usr/local/bin/hg":
+		    ensure => "/tools/python27-mercurial/bin/hg",
+		    require => Package["mozilla-python27-virtualenv"];
             }
 
             service {

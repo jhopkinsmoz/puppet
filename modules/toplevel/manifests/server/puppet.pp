@@ -16,6 +16,9 @@ class toplevel::server::puppet inherits toplevel::base {
         "/etc/puppet/fileserver.conf":
             require => Package["puppet-server"],
             source => "puppet:///modules/toplevel/server/puppet/fileserver.conf";
+        "/etc/puppet/autosign.conf":
+            require => Package["puppet-server"],
+            source => "puppet:///modules/toplevel/server/puppet/autosign.conf";
         "/etc/httpd/conf.d/yum_mirrors.conf":
             require => Package["httpd"],
             source => "puppet:///modules/toplevel/server/puppet/yum_mirrors.conf";
@@ -26,7 +29,9 @@ class toplevel::server::puppet inherits toplevel::base {
             mode => 0750;
         "/etc/sysconfig/iptables":
             source => "puppet:///modules/toplevel/server/puppet/iptables";
-        "/etc/sysconfig/selinux":
+        # TODO: move to another module
+        # TODO: also, make this work
+        ["/etc/sysconfig/selinux", "/etc/selinux/config"]:
             source => "puppet:///modules/toplevel/server/puppet/selinux";
     }
 
