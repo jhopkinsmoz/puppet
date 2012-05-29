@@ -39,20 +39,17 @@ fi
 /usr/sbin/ntpdate pool.ntp.org
 
 /bin/echo "=== Installing puppet... ==="
-# Make sure puppet-server isn't installed
-(/bin/rpm -e puppet-server > /dev/null 2>&1  || exit 0)
+# Make sure puppet-server isn't installed already.
+# We can end up with file permission issues if we upgrade puppet-server between
+# different rpm repos (e.g. from epel to puppetlabs)
+(/bin/rpm -e puppet-server > /dev/null 2>&1 || exit 0)
 (/bin/rpm -q puppet  > /dev/null 2>&1 || /usr/bin/yum -y install puppet)
 
 /bin/echo "=== Applying toplevel::server::puppet..."
-/bin/echo '$extlookup_datadir = "$settings::manifestdir/extlookup"' > /tmp/puppetmaster.pp
-/bin/echo '$extlookup_precedence = ["local-config", "default-config", "secrets"]' >> /tmp/puppetmaster.pp
-/bin/echo 'stage { "packagesetup": before => Stage["main"]; }' >> /tmp/puppetmaster.pp
-/bin/echo 'include toplevel::server::puppet' >> /tmp/puppetmaster.pp
 /bin/cp /etc/puppet/production/setup/puppet.conf /etc/puppet/puppet.conf
 
-# TODO: This actually can return 0 if it fails....
-/usr/bin/puppet apply --modulepath /etc/puppet/production/modules --manifestdir /etc/puppet/production/manifests /tmp/puppetmaster.pp || exit 1
-/bin/rm -f /tmp/puppetmaster.pp
+# TODO: This actually can return 0 if it fails to satisfy some dependencies
+/usr/bin/puppet apply --modulepath /etc/puppet/production/modules --manifestdir /etc/puppet/production/manifests /etc/puppet/production/manifests/puppetmaster.pp || exit 1
 
 #/bin/echo "=== Generating puppet CA..."
 #/usr/sbin/puppetmasterd --ssldir=/var/lib/puppet/ssl-master
