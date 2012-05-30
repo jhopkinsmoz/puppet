@@ -1,5 +1,6 @@
 class dirs::builds::ccache {
     include dirs::builds
+    include packages::ccache
 
     file {
         "/builds/ccache":
@@ -11,7 +12,7 @@ class dirs::builds::ccache {
 
     exec {
         "ccache-maxsize":
-            require => [File["/builds/ccache"], Package["ccache"]],
+            require => [File["/builds/ccache"], Class["packages::ccache"]],
             command => "/usr/bin/ccache -M10G",
             environment => [
                 "CCACHE_DIR=/builds/ccache",

@@ -17,6 +17,7 @@ class toplevel::slave::build inherits toplevel::slave {
     include packages::mozilla::py27_virtualenv
     include packages::xvfb
     include packages::metacity
+    include packages::ccache
 
     supervisord::supervise {
         'xvfb':
