@@ -11,7 +11,7 @@ class toplevel::slave::build inherits toplevel::slave {
     include nrpe::check::procs_regex
     include nrpe::check::child_procs_regex
 
-    supervisord2::supervise {
+    supervisord::supervise {
         'Xvfb':
             command => "/usr/bin/Xvfb +extension :2",
             user => cltbld,

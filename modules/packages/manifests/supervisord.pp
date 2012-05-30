@@ -1,4 +1,4 @@
-class packages::supervisord2 {
+class packages::supervisord {
     case $operatingsystem {
         CentOS,RedHat: {
             package {

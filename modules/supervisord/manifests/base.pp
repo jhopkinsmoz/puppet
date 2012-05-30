@@ -1,5 +1,6 @@
-class supervisord2::base {
-    include packages::supervisord2
+# NB: This is specific to supervisord version 2
+class supervisord::base {
+    include packages::supervisord
 
     # The flow here is pretty straightforward
     # Files in /etc/supervisord.conf.d are the root of the dependency tree
@@ -17,7 +18,7 @@ class supervisord2::base {
 
         "/etc/supervisord.conf.d/00header":
             notify => Exec["supervisord_make_config"],
-            source => "puppet:///modules/supervisord2/supervisord.conf.header";
+            source => "puppet:///modules/supervisord/supervisord.conf.header";
     }
 
     exec {
@@ -37,7 +38,7 @@ class supervisord2::base {
     service {
         "supervisord":
             require => [
-                Class["packages::supervisord2"],
+                Class["packages::supervisord"],
                 File["/etc/supervisord.conf"],
             ],
             enable => true,
