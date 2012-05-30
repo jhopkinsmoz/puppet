@@ -10,6 +10,12 @@ class toplevel::server::puppet inherits toplevel::base {
         "puppet-server":
             require => Package["puppet"],
             ensure => $puppet::puppet_version;
+        "createrepo":
+            ensure => installed;
+        "mercurial":
+            ensure => installed;
+        "git":
+            ensure => installed;
     }
 
     file {
