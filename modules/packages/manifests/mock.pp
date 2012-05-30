@@ -1,6 +1,6 @@
 class packages::mock {
     case $operatingsystem{
-        CentOS: {
+        CentOS,RedHat: {
             package {
                 "mock":
                     ensure => latest;

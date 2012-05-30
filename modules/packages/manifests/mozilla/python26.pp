@@ -1,6 +1,6 @@
 class packages::mozilla::python26 {
     case $operatingsystem{
-        CentOS: {
+        CentOS,RedHat: {
             package {
                 "mozilla-python26":
                     ensure => latest;

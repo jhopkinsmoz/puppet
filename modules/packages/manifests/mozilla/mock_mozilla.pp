@@ -1,6 +1,6 @@
 class packages::mozilla::mock_mozilla {
     case $operatingsystem{
-        CentOS: {
+        CentOS,RedHat: {
             package {
                 "mock_mozilla":
                     ensure => latest;

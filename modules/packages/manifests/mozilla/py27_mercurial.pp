@@ -1,7 +1,7 @@
 class packages::mozilla::py27_mercurial {
     include packages::mozilla::python27
     case $operatingsystem{
-        CentOS: {
+        CentOS,RedHat: {
             package {
                 "mozilla-python27-mercurial":
                     ensure => latest,
