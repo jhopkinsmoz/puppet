@@ -24,8 +24,6 @@ class packages::mozilla-tools {
                     ensure => latest;
                 "metacity":
                     ensure => latest;
-                "supervisor":
-                    ensure => latest;
                 "ccache":
                     ensure => latest;
             }
@@ -50,21 +48,9 @@ class packages::mozilla-tools {
                 "/etc/mock_mozilla/mozilla-centos6-x86_64.cfg":
                     ensure => present,
                     source => "puppet:///modules/packages/mozilla-centos6-x86_64.cfg";
-                "/etc/supervisord.conf":
-                    require => Package["supervisor"],
-                    ensure => present,
-                    source => "puppet:///modules/packages/supervisord.conf";
                 "/usr/local/bin/hg":
                     ensure => "/tools/python27-mercurial/bin/hg",
                     require => Package["mozilla-python27-virtualenv"];
-            }
-
-            service {
-                "supervisord":
-                    require => File["/etc/supervisord.conf"],
-                    subscribe => File["/etc/supervisord.conf"],
-                    enable => true,
-                    ensure => running;
             }
 
             # The puppet group type can't do this it seems

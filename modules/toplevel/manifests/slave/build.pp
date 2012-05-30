@@ -10,4 +10,17 @@ class toplevel::slave::build inherits toplevel::slave {
     include nrpe::check::ide_smart
     include nrpe::check::procs_regex
     include nrpe::check::child_procs_regex
+
+    supervisord2::supervise {
+        'Xvfb':
+            command => "/usr/bin/Xvfb +extension :2",
+            user => cltbld,
+            autostart => true,
+            autorestart => true;
+        'metacity':
+            command => '/usr/bin/metacity --display :2 --replace',
+            user => cltbld,
+            autostart => true,
+            autorestart => true;
+    }
 }
