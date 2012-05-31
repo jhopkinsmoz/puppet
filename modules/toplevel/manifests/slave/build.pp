@@ -21,7 +21,7 @@ class toplevel::slave::build inherits toplevel::slave {
 
     supervisord::supervise {
         'xvfb':
-            command => "/usr/bin/Xvfb +extension :2",
+            command => "/usr/bin/Xvfb +extension RANDR :2",
             user => cltbld,
             autostart => true,
             autorestart => true;
