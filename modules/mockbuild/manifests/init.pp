@@ -3,19 +3,27 @@ class mockbuild {
     file {
         "/etc/mock_mozilla/mozilla-f11-i386.cfg":
             require => Class["packages::mozilla::mock_mozilla"],
-            ensure => present,
+            owner => root,
+            group => root,
+            mode => 0644,
             source => "puppet:///modules/mockbuild/mozilla-f11-i386.cfg";
         "/etc/mock_mozilla/mozilla-f16-i386.cfg":
             require => Class["packages::mozilla::mock_mozilla"],
-            ensure => present,
+            owner => root,
+            group => root,
+            mode => 0644,
             source => "puppet:///modules/mockbuild/mozilla-f16-i386.cfg";
         "/etc/mock_mozilla/mozilla-centos6-i386.cfg":
             require => Class["packages::mozilla::mock_mozilla"],
-            ensure => present,
+            owner => root,
+            group => root,
+            mode => 0644,
             source => "puppet:///modules/mockbuild/mozilla-centos6-i386.cfg";
         "/etc/mock_mozilla/mozilla-centos6-x86_64.cfg":
             require => Class["packages::mozilla::mock_mozilla"],
-            ensure => present,
+            owner => root,
+            group => root,
+            mode => 0644,
             source => "puppet:///modules/mockbuild/mozilla-centos6-x86_64.cfg";
     }
 }
