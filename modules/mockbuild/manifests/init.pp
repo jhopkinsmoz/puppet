@@ -1,9 +1,6 @@
 class mockbuild {
     include packages::mozilla::mock_mozilla
     file {
-        "/etc/mock_mozilla/mozilla-f11-i386.cfg":
-            require => Class["packages::mozilla::mock_mozilla"],
-            source => "puppet:///modules/mockbuild/mozilla-f11-i386.cfg";
         "/etc/mock_mozilla/mozilla-f16-i386.cfg":
             require => Class["packages::mozilla::mock_mozilla"],
             source => "puppet:///modules/mockbuild/mozilla-f16-i386.cfg";
