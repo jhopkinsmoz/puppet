@@ -1,6 +1,6 @@
 class packages::ccache {
     case $operatingsystem {
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "ccache":
                     ensure => latest;

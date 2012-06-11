@@ -15,20 +15,10 @@ class toplevel::slave::build inherits toplevel::slave {
     include packages::mozilla::git
     include packages::mozilla::py27_mercurial
     include packages::mozilla::py27_virtualenv
-    include packages::xvfb
-    include packages::metacity
-    include packages::ccache
 
-    supervisord::supervise {
-        'xvfb':
-            command => "/usr/bin/Xvfb +extension RANDR :2",
-            user => cltbld,
-            autostart => true,
-            autorestart => true;
-        'metacity':
-            command => '/usr/bin/metacity --display :2 --replace',
-            user => cltbld,
-            autostart => true,
-            autorestart => true;
+    ccache::ccache_dir {
+        "/builds/ccache":
+            maxsize => "10G",
+            owner => $::config::builder_username;
     }
 }

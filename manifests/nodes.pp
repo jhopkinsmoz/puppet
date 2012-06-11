@@ -25,3 +25,7 @@ node /.*\.releng\.aws-us-west-1\.mozilla\.com/ {
     }
     include toplevel::slave::build::mock
 }
+
+node "linux-foopy-test.build.mtv1.mozilla.com" {
+
+}
