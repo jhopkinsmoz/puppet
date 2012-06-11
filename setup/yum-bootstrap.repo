@@ -1,24 +1,24 @@
 [mozilla]
 name=Mozilla Package Repo - $basearch
-baseurl=http://repos/repos/yum/mozilla/CentOS/6/x86_64
+baseurl=file:///data/repos/yum/mozilla/CentOS/6/x86_64
 enabled=1
 gpgcheck=0
 
 [epel]
 name=EPEL - $basearch
-baseurl=http://repos/repos/yum/mirrors/epel/6/latest/x86_64
+baseurl=file:///data/repos/yum/mirrors/epel/6/latest/x86_64
 enabled=1
 gpgcheck=0
 
 [centos-os]
 name=centos - os - $basearch
-baseurl=http://repos/repos/yum/mirrors/centos/6/latest/os/x86_64
+baseurl=file:///data/repos/yum/mirrors/centos/6/latest/os/x86_64
 enabled=1
 gpgcheck=0
 
 [centos-updates]
 name=centos - updates - $basearch
-baseurl=http://repos/repos/yum/mirrors/centos/6/latest/updates/x86_64
+baseurl=file:///data/repos/yum/mirrors/centos/6/latest/updates/x86_64
 enabled=1
 gpgcheck=0
 

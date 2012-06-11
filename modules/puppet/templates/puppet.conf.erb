@@ -22,3 +22,4 @@
     modulepath = $confdir/production/modules
     templatedir = $confdir/production/templates
     manifest = $manifestdir/site.pp
+    ca = <%= scope.lookupvar('::config::puppet_server_ca_enabled') %>

@@ -35,10 +35,6 @@ class toplevel::server::puppet inherits toplevel::base {
             mode => 0750;
         "/etc/sysconfig/iptables":
             source => "puppet:///modules/toplevel/server/puppet/iptables";
-        # TODO: move to another module
-        # TODO: also, make this work
-        ["/etc/sysconfig/selinux", "/etc/selinux/config"]:
-            source => "puppet:///modules/toplevel/server/puppet/selinux";
     }
 
     service {

@@ -18,25 +18,25 @@ if [ -z "$correctmatch" ]; then
   /sbin/service sendmail condrestart
 fi
 
-/bin/echo "=== Installing apache, setting up mirrors ==="
-(/bin/rpm -q httpd  > /dev/null 2>&1 || /usr/bin/yum -y install httpd)
-/bin/cp /etc/puppet/production/modules/toplevel/files/server/puppet/yum_mirrors.conf /etc/httpd/conf.d/yum_mirrors.conf
-/etc/init.d/httpd restart
-
 /bin/echo "=== Setting up yum repositories..."
-#/bin/rm -f /etc/yum.repos.d/*
+/bin/rm -f /etc/yum.repos.d/*
 /bin/cp /etc/puppet/production/setup/yum-bootstrap.repo /etc/yum.repos.d
 /bin/cp /etc/puppet/production/setup/hosts-bootstrap /etc/hosts
 
 /bin/echo "=== Cleaning up yum ==="
 /usr/bin/yum clean all
 
-echo "=== Ensuring clock is set correctly..."
-if ( `ps ax | grep -v grep | grep -q ntpd` ); then
-    # Stop ntpd running. Puppet will start it back up
-    /sbin/service ntpd stop
-fi
-/usr/sbin/ntpdate pool.ntp.org
+/bin/echo "=== Installing apache, setting up mirrors ==="
+(/bin/rpm -q httpd  > /dev/null 2>&1 || /usr/bin/yum -y install httpd)
+/bin/cp /etc/puppet/production/modules/toplevel/files/server/puppet/yum_mirrors.conf /etc/httpd/conf.d/yum_mirrors.conf
+/etc/init.d/httpd restart
+
+#echo "=== Ensuring clock is set correctly..."
+#if ( `ps ax | grep -v grep | grep -q ntpd` ); then
+    ## Stop ntpd running. Puppet will start it back up
+    #/sbin/service ntpd stop
+#fi
+#/usr/sbin/ntpdate pool.ntp.org
 
 /bin/echo "=== Installing puppet... ==="
 # Make sure puppet-server isn't installed already.
