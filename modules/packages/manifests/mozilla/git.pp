@@ -1,6 +1,6 @@
 class packages::mozilla::git {
     case $operatingsystem{
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "mozilla-git":
                     ensure => latest;

@@ -1,7 +1,7 @@
 class network {
     # ensure that the host uses its fqdn
     case $operatingsystem {
-        CentOS,RedHat: {
+        CentOS: {
             # always set the hostname to the fqdn
             file {
                 "/etc/sysconfig/network":
@@ -22,4 +22,5 @@ class network {
             }
         }
     }
+
 }

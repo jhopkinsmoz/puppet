@@ -2,7 +2,7 @@ class ntp::atboot {
     include packages::ntp
 
     case $operatingsystem {
-        CentOS,RedHat: {
+        CentOS: {
             service {
                 "ntpdate": 
                     enable => true,

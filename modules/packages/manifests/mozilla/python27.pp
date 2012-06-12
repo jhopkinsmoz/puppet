@@ -1,6 +1,6 @@
 class packages::mozilla::python27 {
     case $operatingsystem{
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "mozilla-python27":
                     ensure => latest;

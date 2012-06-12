@@ -5,7 +5,6 @@ class buildslave::startup {
 
     $startuptype = $operatingsystem ? {
         CentOS      => "initd",
-        RedHat      => "initd",
         # not done in PuppetAgain yet:
         #Fedora      => "desktop",
         #Darwin      => "launchd"

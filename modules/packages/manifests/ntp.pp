@@ -1,6 +1,6 @@
 class packages::ntp {
     case $operatingsystem {
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "ntp":
                     ensure => latest;

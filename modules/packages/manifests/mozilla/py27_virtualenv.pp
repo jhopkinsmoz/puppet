@@ -1,7 +1,7 @@
 class packages::mozilla::py27_virtualenv {
     include packages::mozilla::python27
     case $operatingsystem{
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "mozilla-python27-virtualenv":
                     ensure => latest,
