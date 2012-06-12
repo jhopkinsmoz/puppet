@@ -27,7 +27,7 @@ fi
 /usr/bin/yum clean all
 
 /bin/echo "=== Installing apache, setting up mirrors ==="
-(/bin/rpm -q httpd  > /dev/null 2>&1 || /usr/bin/yum -y install httpd)
+(/bin/rpm -q httpd  > /dev/null 2>&1 || /usr/bin/yum -y -q install httpd)
 /bin/cp /etc/puppet/production/modules/toplevel/files/server/puppet/yum_mirrors.conf /etc/httpd/conf.d/yum_mirrors.conf
 /etc/init.d/httpd restart
 
@@ -36,25 +36,21 @@ fi
     ## Stop ntpd running. Puppet will start it back up
     #/sbin/service ntpd stop
 #fi
-#/usr/sbin/ntpdate pool.ntp.org
+#/usr/sbin/ntpdate ntp.build.mozilla.org
 
 /bin/echo "=== Installing puppet... ==="
+
 # Make sure puppet-server isn't installed already.
 # We can end up with file permission issues if we upgrade puppet-server between
 # different rpm repos (e.g. from epel to puppetlabs)
 (/bin/rpm -e puppet-server > /dev/null 2>&1 || exit 0)
-(/bin/rpm -q puppet  > /dev/null 2>&1 || /usr/bin/yum -y install puppet)
+(/bin/rpm -q puppet  > /dev/null 2>&1 || /usr/bin/yum -y -q install puppet)
 
 /bin/echo "=== Applying toplevel::server::puppet..."
 /bin/cp /etc/puppet/production/setup/puppet.conf /etc/puppet/puppet.conf
 
 # TODO: This actually can return 0 if it fails to satisfy some dependencies
 /usr/bin/puppet apply --modulepath /etc/puppet/production/modules --manifestdir /etc/puppet/production/manifests /etc/puppet/production/manifests/puppetmaster.pp || exit 1
-
-#/bin/echo "=== Generating puppet CA..."
-#/usr/sbin/puppetmasterd --ssldir=/var/lib/puppet/ssl-master
-#sleep 1
-#/usr/bin/killall puppetmasterd
 
 /bin/echo "=== Fixing incorrect server name in /etc/puppet.conf"
 /bin/sed -i "s/server = .*/server = $MYFQDN/" /etc/puppet/puppet.conf

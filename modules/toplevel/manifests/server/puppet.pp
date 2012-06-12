@@ -1,5 +1,5 @@
 # toplevel class for running a puppet master
-class toplevel::server::puppet inherits toplevel::base {
+class toplevel::server::puppet inherits toplevel::server {
     include nrpe::check::ntp_time
     include nrpe::check::ganglia
     include puppet
