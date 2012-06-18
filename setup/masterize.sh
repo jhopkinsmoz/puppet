@@ -50,9 +50,9 @@ fi
 /bin/cp /etc/puppet/production/setup/puppet.conf /etc/puppet/puppet.conf
 
 # TODO: This actually can return 0 if it fails to satisfy some dependencies
-/usr/bin/puppet apply --modulepath /etc/puppet/production/modules --manifestdir /etc/puppet/production/manifests /etc/puppet/production/manifests/puppetmaster.pp || exit 1
+# /usr/bin/puppet apply --modulepath /etc/puppet/production/modules --manifestdir /etc/puppet/production/manifests /etc/puppet/production/manifests/puppetmaster.pp || exit 1
 
-/bin/echo "=== Fixing incorrect server name in /etc/puppet.conf"
-/bin/sed -i "s/server = .*/server = $MYFQDN/" /etc/puppet/puppet.conf
+# /bin/echo "=== Fixing incorrect server name in /etc/puppet.conf"
+# /bin/sed -i "s/server = .*/server = $MYFQDN/" /etc/puppet/puppet.conf
 
 exit 0

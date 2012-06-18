@@ -1,0 +1,40 @@
+# you probably want to tune these settings
+PassengerHighPerformance on
+PassengerMaxPoolSize 12
+PassengerPoolIdleTime 1500
+# PassengerMaxRequests 1000
+PassengerStatThrottleRate 120
+RackAutoDetect Off
+RailsAutoDetect Off
+
+Listen 8140
+
+<VirtualHost *:8140>
+        SSLEngine on
+        SSLProtocol -ALL +SSLv3 +TLSv1
+        SSLCipherSuite ALL:!ADH:RC4+RSA:+HIGH:+MEDIUM:-LOW:-SSLv2:-EXP
+
+        SSLCertificateFile      /var/lib/puppet/ssl/certs/<%= fqdn %>.pem
+        SSLCertificateKeyFile   /var/lib/puppet/ssl/private_keys/<%= fqdn %>.pem
+        SSLCertificateChainFile /var/lib/puppet/ssl/certs/ca.pem
+        SSLCACertificateFile    /var/lib/puppet/ssl/certs/ca.pem
+        # If Apache complains about invalid signatures on the CRL, you can try disabling
+        # CRL checking by commenting the next line, but this is not recommended.
+        SSLCARevocationFile     /etc/httpd/ca_crl.pem
+        SSLVerifyClient require
+        SSLVerifyDepth  1
+        SSLOptions +StdEnvVars
+
+        RequestHeader set X-SSL-Subject %{SSL_CLIENT_S_DN}e
+        RequestHeader set X-Client-DN %{SSL_CLIENT_S_DN}e
+        RequestHeader set X-Client-Verify %{SSL_CLIENT_VERIFY}e
+
+        DocumentRoot /var/lib/puppet/rack/public
+        RackBaseURI /
+        <Directory /var/lib/puppet/rack>
+                Options None
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+</VirtualHost>

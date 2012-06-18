@@ -1,5 +1,6 @@
 # toplevel class for running a puppet master
-class toplevel::server::puppet inherits toplevel::server {
+class toplevel::server::puppet ($enable = true, $ensure = running) {
+    include toplevel::server
     include nrpe::check::ntp_time
     include nrpe::check::ganglia
     include puppet
@@ -54,8 +55,8 @@ class toplevel::server::puppet inherits toplevel::server {
             ],
             # TODO: Add config version script
             subscribe => [File["/etc/puppet/puppet.conf"], File["/etc/puppet/fileserver.conf"]],
-            ensure => running,
-            enable => true;
+            ensure => $ensure,
+            enable => $enable;
         "httpd":
             require => [Package["httpd"], File["/etc/httpd/conf.d/yum_mirrors.conf"]],
             subscribe => File["/etc/httpd/conf.d/yum_mirrors.conf"],
