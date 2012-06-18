@@ -16,4 +16,5 @@ class config {
     $builder_username = extlookup("builder_username")
     $nrpe_allowed_hosts = extlookup("nrpe_allowed_hosts")
     $ntp_server = extlookup("ntp_server")
+    $relay_domains = extlookup("relay_domains")
 }
