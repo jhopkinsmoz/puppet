@@ -28,6 +28,8 @@ class packages::setup {
             url_path => "repos/yum/mirrors/puppetlabs/el/6/products/$hardwaremodel";
         "releng-public-${operatingsystem}${majorver}-${hardwaremodel}":
             url_path => "repos/yum/releng/public/$operatingsystem/$majorver/$hardwaremodel";
+        "passenger-${operatingsystem}${majorver}-${hardwaremodel}":
+            url_path => "repos/yum/mirrors/passenger.stealthymonkeys.com/rhel/6.2/$hardwaremodel";
         "releng-public-${operatingsystem}${majorver}-noarch":
             url_path => "repos/yum/releng/public/$operatingsystem/$majorver/noarch";
     }

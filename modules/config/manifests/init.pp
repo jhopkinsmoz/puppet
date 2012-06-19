@@ -5,9 +5,10 @@
 # We use config rather than settings because "settings" is a magic class
 class config {
     include config::secrets
-    
+
     $puppet_notif_email = extlookup("puppet_notif_email")
     $puppet_server = extlookup("puppet_server")
+    $puppetca_server = extlookup("puppetca_server")
     $puppet_server_ca_enabled = extlookup("puppet_server_ca_enabled")
     $data_server = extlookup("data_server")
     $data_servers = extlookup("data_servers")
@@ -15,4 +16,5 @@ class config {
     $builder_username = extlookup("builder_username")
     $nrpe_allowed_hosts = extlookup("nrpe_allowed_hosts")
     $ntp_server = extlookup("ntp_server")
+    $relay_domains = extlookup("relay_domains")
 }

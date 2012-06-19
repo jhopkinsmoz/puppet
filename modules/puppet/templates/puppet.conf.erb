@@ -10,6 +10,7 @@
     classfile = $vardir/classes.txt
     localconfig = $vardir/localconfig
     server = <%= scope.lookupvar('::config::puppet_server') %>
+    ca_server = <%= scope.lookupvar('::config::puppetca_server') %>
 
     # don't check the master's CRL; see
     #   https://projects.puppetlabs.com/issues/14550
