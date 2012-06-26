@@ -18,17 +18,15 @@ node "relabs-slave.build.mtv1.mozilla.com" {
     include toplevel::slave::test
 }
 
-node /puppetca-\d+.srv.releng\.aws-us-west-1\.mozilla\.com/ {
-    $extlookup_precedence = ["puppetca-config", "default-config", "secrets"]
+node /puppetca-\d+\.srv\.releng\.aws-us-west-1\.mozilla\.com/ {
     # Make sure we get our /etc/hosts set up
     class {
         "network::aws": stage => packagesetup,
     }
-    include toplevel::server::puppet
+    include toplevel::server::puppetca
 }
 
-node /puppetmaster-\d+.srv.releng\.aws-us-west-1\.mozilla\.com/ {
-    $extlookup_precedence = ["puppetmaster-config", "default-config", "secrets"]
+node /puppetmaster-\d+\.srv\.releng\.aws-us-west-1\.mozilla\.com/ {
     # Make sure we get our /etc/hosts set up
     class {
         "network::aws": stage => packagesetup;
