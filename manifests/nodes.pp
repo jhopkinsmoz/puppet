@@ -27,7 +27,7 @@ node /.*\.build\.aws-us-west-1\.mozilla\.com/ {
 }
 
 node /^puppetmaster-\d+/ {
-    # do nothing, just sync cert/crl
+    include toplevel::server::puppetmaster
 }
 
 node "linux-foopy-test.build.mtv1.mozilla.com" {

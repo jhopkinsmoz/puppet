@@ -40,11 +40,16 @@ fi
 
 /bin/echo "=== Installing puppet... ==="
 
+(/bin/rpm -q puppet  > /dev/null 2>&1 || /usr/bin/yum -y -q install puppet)
+
+# generate initial certs to allow apache start properly
+(/bin/rpm -q puppet-server > /dev/null 2>&1 || /usr/bin/yum -y -q install puppet-server)
+/sbin/service puppetmaster restart
+/sbin/service puppetmaster stop
 # Make sure puppet-server isn't installed already.
 # We can end up with file permission issues if we upgrade puppet-server between
 # different rpm repos (e.g. from epel to puppetlabs)
 (/bin/rpm -e puppet-server > /dev/null 2>&1 || exit 0)
-(/bin/rpm -q puppet  > /dev/null 2>&1 || /usr/bin/yum -y -q install puppet)
 
 /bin/echo "=== Applying toplevel::server::puppet..."
 /bin/cp /etc/puppet/production/setup/puppet.conf /etc/puppet/puppet.conf
