@@ -1,5 +1,5 @@
 # toplevel class for running a puppet master
-class toplevel::server::puppet ($enable = true, $ensure = running) {
+class toplevel::server::puppet {
     include toplevel::server
     include nrpe::check::ntp_time
     include nrpe::check::ganglia
@@ -7,6 +7,8 @@ class toplevel::server::puppet ($enable = true, $ensure = running) {
 
     package {
         "httpd":
+            ensure => installed;
+        "mod_ssl":
             ensure => installed;
         "puppet-server":
             require => Package["puppet"],
@@ -16,6 +18,10 @@ class toplevel::server::puppet ($enable = true, $ensure = running) {
         "mercurial":
             ensure => installed;
         "git":
+            ensure => installed;
+        "rubygem-mongrel":
+            ensure => installed;
+        "inotify-tools":
             ensure => installed;
     }
 
@@ -29,6 +35,9 @@ class toplevel::server::puppet ($enable = true, $ensure = running) {
         "/etc/httpd/conf.d/yum_mirrors.conf":
             require => Package["httpd"],
             source => "puppet:///modules/toplevel/server/puppet/yum_mirrors.conf";
+        "/etc/httpd/conf.d/puppetmaster.conf":
+            require => [Package["httpd"], Package["mod_ssl"]],
+            content => template("toplevel/server/puppet/puppetmaster.conf.erb");
         "/var/lib/puppet/ssl/ca":
             ensure => directory,
             owner => puppet,
@@ -36,6 +45,8 @@ class toplevel::server::puppet ($enable = true, $ensure = running) {
             mode => 0750;
         "/etc/sysconfig/iptables":
             source => "puppet:///modules/toplevel/server/puppet/iptables";
+        "/etc/sysconfig/puppetmaster":
+            source => "puppet:///modules/toplevel/server/puppet/puppetmaster.sysconfig";
     }
 
     service {
@@ -51,12 +62,13 @@ class toplevel::server::puppet ($enable = true, $ensure = running) {
                 Package["puppet-server"],
                 File["/etc/puppet/puppet.conf"],
                 File["/etc/puppet/fileserver.conf"],
+                File["/etc/sysconfig/puppetmaster"],
                 File["/var/lib/puppet/ssl/ca"],
             ],
             # TODO: Add config version script
             subscribe => [File["/etc/puppet/puppet.conf"], File["/etc/puppet/fileserver.conf"]],
-            ensure => $ensure,
-            enable => $enable;
+            ensure => running,
+            enable => true;
         "httpd":
             require => [Package["httpd"], File["/etc/httpd/conf.d/yum_mirrors.conf"]],
             subscribe => File["/etc/httpd/conf.d/yum_mirrors.conf"],
