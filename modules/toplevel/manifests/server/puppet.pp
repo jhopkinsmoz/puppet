@@ -47,9 +47,9 @@ class toplevel::server::puppet {
         "/etc/httpd/conf.d/yum_mirrors.conf":
             require => Package["httpd"],
             source => "puppet:///modules/toplevel/server/puppet/yum_mirrors.conf";
-        "/etc/httpd/conf.d/puppetmaster.conf":
+        "/etc/httpd/conf.d/puppetmaster_passenger.conf":
             require => [Package["httpd"], Package["mod_ssl"], Package["mod_passenger"]],
-            content => template("toplevel/server/puppet/mod_passenger.conf.erb");
+            content => template("toplevel/server/puppet/puppetmaster_passenger.conf.erb");
         "/var/lib/puppet/ssl/ca":
             ensure => directory,
             owner => puppet,
@@ -89,11 +89,11 @@ class toplevel::server::puppet {
             require => [
                 Package["httpd"], Package['mod_ssl'], Package['mod_passenger'],
                 File["/etc/httpd/conf.d/yum_mirrors.conf"],
-                File['/etc/httpd/conf.d/puppetmaster.conf']
+                File['/etc/httpd/conf.d/puppetmaster_passenger.conf']
             ],
             subscribe => [
                 File["/etc/httpd/conf.d/yum_mirrors.conf"],
-                File['/etc/httpd/conf.d/puppetmaster.conf']
+                File['/etc/httpd/conf.d/puppetmaster_passenger.conf']
             ],
             ensure => running,
             enable => true;

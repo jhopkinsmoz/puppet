@@ -1,3 +1,0 @@
-# Managed by puppet
-SELINUX=disabled
-SELINUXTYPE=targeted

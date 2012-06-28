@@ -8,7 +8,6 @@ class config {
 
     $puppet_notif_email = extlookup("puppet_notif_email")
     $puppet_server = extlookup("puppet_server")
-    $puppetca_server = extlookup("puppetca_server")
     $puppet_server_ca_enabled = extlookup("puppet_server_ca_enabled")
     $data_server = extlookup("data_server")
     $data_servers = extlookup("data_servers")
