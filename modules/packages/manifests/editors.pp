@@ -1,14 +1,18 @@
-class packages::ntp {
+class packages::editors {
     case $operatingsystem {
         CentOS: {
             package {
-                "ntp":
+                "nano":
+                    ensure => latest;
+                "vim-minimal":
                     ensure => latest;
             }
         }
+ 
         Darwin: {
-            #ntpd is installed with base install image
+            # installed by default
         }
+
         default: {
             fail("cannot install on $operatingsystem")
         }
