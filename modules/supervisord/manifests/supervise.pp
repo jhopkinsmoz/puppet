@@ -12,7 +12,7 @@ define supervisord::supervise($command, $user, $autostart=true, $autorestart=tru
 
     service {
         "supervisord-$name":
-            require => File["/etc/init.d/supervisord-$name"],
+            require => File["/etc/init.d/supervisord-$name", "/etc/supervisord.conf"]],
             enable => $autostart,
             ensure => $autorestart ? {
                 true => "running",
