@@ -1,4 +1,4 @@
-define supervisord::supervise($command, $user, $autostart=true, $autorestart=true) {
+define supervisord::supervise($command, $user, $autostart=true, $autorestart=true, $configtest_command="") {
     include supervisord::base
 
     file {
@@ -13,7 +13,10 @@ define supervisord::supervise($command, $user, $autostart=true, $autorestart=tru
     service {
         "supervisord-$name":
             require => File["/etc/init.d/supervisord-$name"],
-            enable => true,
-            ensure => running;
+            enable => $autostart,
+            ensure => $autorestart ? {
+                true => "running",
+                default => false,
+            };
     }
 }
