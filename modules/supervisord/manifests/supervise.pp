@@ -14,6 +14,6 @@ define supervisord::supervise($command, $user, $autostart=true, $autorestart=tru
             status => "/usr/bin/supervisorctl status $name",
             restart => "/usr/bin/supervisorctl restart $name",
             start => "/usr/bin/supervisorctl start $name",
-            start => "/usr/bin/supervisorctl stop $name",
+            stop => "/usr/bin/supervisorctl stop $name";
     }
 }
