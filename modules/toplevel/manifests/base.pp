@@ -13,4 +13,6 @@ class toplevel::base {
     include users::global
     include network
     include sudoers
+    include packages::editors
+    include powermanagement
 }
