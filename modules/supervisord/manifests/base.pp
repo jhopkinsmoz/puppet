@@ -32,7 +32,8 @@ class supervisord::base {
         "/etc/supervisord.conf":
             require => Exec["supervisord_make_config"],
             source => "/tmp/supervisord.conf.tmp",
-            notify => Service['supervisord'];
+            # notify => Service['supervisord']
+            ;
     }
 
     service {
