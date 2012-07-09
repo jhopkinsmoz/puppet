@@ -1,6 +1,6 @@
 class packages::supervisord {
     case $operatingsystem {
-        CentOS,RedHat: {
+        CentOS: {
             package {
                 "supervisor":
                     ensure => latest;

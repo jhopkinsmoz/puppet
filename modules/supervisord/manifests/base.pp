@@ -41,6 +41,7 @@ class supervisord::base {
                 Class["packages::supervisord"],
                 File["/etc/supervisord.conf"],
             ],
+            # TODO: Use supervisorctl for these
             enable => true,
             ensure => running;
     }
