@@ -41,7 +41,7 @@ class supervisord::base {
                 Class["packages::supervisord"],
                 File["/etc/supervisord.conf"],
             ],
-            restart => "/usr/bin/supervisectl reload",
+            restart => "/usr/bin/supervisorctl reload",
             enable => true,
             ensure => running;
     }
