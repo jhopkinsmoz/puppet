@@ -5,21 +5,5 @@ define supervisord::supervise($command, $user, $autostart=true, $autorestart=tru
         "/etc/supervisord.conf.d/$name":
             content => template("supervisord/snippet.erb"),
             notify => Exec["supervisord_make_config"];
-        "/etc/init.d/supervisord-$name":
-            content => template("supervisord/service.erb"),
-            mode => 0755;
-    }
-
-    service {
-        "supervisord-$name":
-            require => [
-                File["/etc/init.d/supervisord-$name"], 
-                File["/etc/supervisord.conf"],
-            ],
-            enable => $autostart,
-            ensure => $autorestart ? {
-                true => "running",
-                default => false,
-            };
     }
 }
